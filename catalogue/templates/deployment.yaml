@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
         - name: catalogue
-          image: "{{ .Values.deployment.imageRepo }}:{{ .Values.deploymet.imageVersion }}"
+          image: "{{ .Values.deployment.imageRepo }}:{{ .Values.deployment.imageVersion }}"
           resources: 
             requests:
               cpu: "100m"
