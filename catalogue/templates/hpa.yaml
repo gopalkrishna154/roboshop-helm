@@ -1,0 +1,26 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: catalogue
+  namespace: roboshop
+  labels: 
+    project: roboshop
+    tier: backend
+    component: catalogue
+spec:
+  # The target workload to scale which is deployment reference
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: catalogue
+  # Bounds for the replica count
+  minReplicas: 1
+  maxReplicas: 4
+  # Metrics thresholds targeting 60% average utilization
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: {{ .Values.hpa.cpuPercentage }}
